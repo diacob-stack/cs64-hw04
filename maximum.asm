@@ -84,8 +84,8 @@ finish:
 	and $t8, $t9, $t5
 
 	bne $t6, $zero, res0
-	bne $t7, $zero, res1
-	bne $t8, $zero, res2
+	bne $t7, $zero, res2
+	j res1
 res0:
 	li $v0, 1
 	move $a0, $t0
