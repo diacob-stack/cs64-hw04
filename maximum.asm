@@ -53,12 +53,14 @@ start1:
 negative1:
 	nor $t0, $t0, $zero
 	addiu $t0, $t0, 1
+	j start2
 start2:
 	blt $t1, $zero, negative2
 	j start3
 negative2:
 	nor $t1, $t1, $zero
 	addiu $t1, $t1, 1
+	j start3
 start3:
         blt $t2, $zero, negative3	
 	j finish
