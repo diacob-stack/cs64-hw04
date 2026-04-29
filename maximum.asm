@@ -9,7 +9,7 @@
 .data
 	# TODO: Complete these incomplete declarations / initializations
 
-	ask: .asciiz "Enter the next number:\n"
+	ask: .asciiz "Enter number:\n"
 	newline: .asciiz "\n"
 	max: .asciiz "Maximum: "
 
@@ -73,36 +73,19 @@ finish:
 	li $v0, 4
 	syscall
 
-	slt $t3, $t1, $t0
-	slt $t4, $t2, $t0
-	slt $t5, $t1, $t2
-
-	and $t6, $t3, $t4
-
-	nor $t9, $t3, $zero
-	and $t7, $t9, $t5
-
-	nor $t9, $t4, $zero
-	and $t8, $t9, $t5
-
-	bne $t6, $zero, res0
-	bne $t7, $zero, res2
-	j res1
-res0:
+	move $t6, $t0
+	slt $t9, $t6, $t1
+	beq $t9, $zero, skip1
+	move $t6, $t1
+skip1:
+	slt $t9, $t6, $t2
+	beq $t9, $zero, skip2
+	move $t6, $t2
+skip2:
 	li $v0, 1
-	move $a0, $t0
+	move $a0, $t6
 	syscall
 	j exit
-res1:
-        li $v0, 1
-        move $a0, $t1
-        syscall
-        j exit
-res2:
-        li $v0, 1
-        move $a0, $t2
-        syscall
-        j exit
 exit:
 	la $a0, newline
         li $v0, 4
