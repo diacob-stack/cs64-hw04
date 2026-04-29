@@ -196,6 +196,26 @@ doSwap:
 
         # TODO: fill in the assembly code here:
 
+	addiu $t0, $zero, 0
+	addiu $t1, $zero, 1
+	li $t7, 11
+	la $t2, myArray
+
+sloop:
+	slt $t6, $t0, $t7
+	beq $t6, $zero, finished
+	sll $t3, $t0, 2
+	sll $t4, $t1, 2
+	addu $t3, $t2, $t3
+	addu $t4, $t2, $t4
+	lw $t5, 0($t3)
+	lw $t6, 0($t4)
+	sw $t6, 0($t3)
+	sw $t5, 0($t4)
+	addiu $t0, $t0, 2
+	addiu $t1, $t1, 2
+	j sloop
+
 
 finished:
         # do ___NOT___ remove this last line
